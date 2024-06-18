@@ -3,8 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import utils.Helpers;
 
@@ -30,7 +28,7 @@ public class StorePage {
     public static String itemPriceContainerSelector = ".a-card-discount";
 
     public void checkSearchResults() {
-        WebElement productsList = Helpers.waitToBeVisible(By.cssSelector(productsListSelector));
+        Helpers.waitToBeVisible(By.cssSelector(productsListSelector));
         WebElement numProducts = Helpers.waitToBeVisible(By.cssSelector(numProductsSelector));
         int numProductsInt = Integer.parseInt(numProducts.getText());
         Assert.assertTrue(numProductsInt > 0);
@@ -72,6 +70,7 @@ public class StorePage {
         for (WebElement product : productList) {
             String productText = product.getText().toLowerCase();
             Assert.assertTrue(productText.contains(brand.toLowerCase()));
+            Assert.assertTrue(productText.contains(size));
         }
         List<WebElement> productPriceList = driver.findElements(By.cssSelector(itemPriceContainerSelector));
         for (WebElement productPrice : productPriceList) {
