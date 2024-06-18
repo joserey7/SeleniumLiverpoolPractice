@@ -11,6 +11,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class BaseTest {
@@ -24,7 +25,8 @@ public class BaseTest {
     public void setUp() throws IOException {
         System.out.println("Starting setUp...");
         if (driver == null) {
-            fr = new FileReader("src\\test\\resources\\config.properties");
+            String configFilePath = Paths.get("src", "test", "resources", "config.properties").toString();
+            fr = new FileReader(configFilePath);
             props.load(fr);
         }
 
